@@ -1,0 +1,76 @@
+.todolist {
+    width: 500px;
+    margin: 50px auto 0;
+    padding: 20px;
+    border: 5px solid grey;
+    background-color: lightgrey;
+}
+
+.todolist__input {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 10px;
+    border: 2px solid grey;
+    font-size: 18px;
+    line-height: 24px;
+    margin-bottom: 20px;
+}
+
+.todolist__list {
+    margin: 0 0 30px;
+    padding: 0;
+}
+
+
+.todolist__item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 2px solid lightslategray;
+}
+
+.todolist__item--done {
+    text-decoration: line-through;
+}
+
+
+/* BUTTONS */
+.btn {
+    background-color: indianred;
+    color: white;
+    padding: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: darkred;
+}
+
+.btn--footer {
+    background-color: lightslategray;
+    margin-right: 10px;
+    padding: 10px;
+    border: 2px solid black;
+}
+
+.btn--footer:last-child {
+    margin-right: 0;
+}
+
+.btn--footer:hover {
+    background-color: #566474;
+}
+
+.btn--active {
+    border: 2px solid indianred;
+    outline-color: indianred;
+}
+
+
+/* TODOLIST FOOTER*/
+.todolist__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
