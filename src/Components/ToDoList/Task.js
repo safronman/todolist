@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {updateTask} from "./Services";
+import s from "./Task.module.css";
 
 class Task extends Component {
     constructor(props) {
@@ -19,6 +20,7 @@ class Task extends Component {
 
         if (this.state.editMode) {
             displayElement = <input type="text"
+                                    className={s.taskInput}
                                     value={this.state.title}
                                     onChange={this.changeTitle.bind(this)}
                                     onBlur={this.saveTitle.bind(this)} />
@@ -29,16 +31,19 @@ class Task extends Component {
                 </span>
         }
 
-        return <li className={this.props.task.isDone ? 'todolist__item  todolist__item--done' : 'todolist__item'}>
+        return <li className={this.props.task.isDone ? `${s.item} ${s.itemDone}` : `${s.item}`}>
             <div>
-                <input type="checkbox"
-                       checked={this.props.task.isDone}
-                       onChange={this.toggleTaskStatus.bind(this)}/>
+                <input
+                    className={s.taskCheckbox}
+                    type="checkbox"
+                    checked={this.props.task.isDone}
+                    onChange={this.toggleTaskStatus.bind(this)}/>
 
                 {displayElement}
             </div>
             <button className='btn'
-                    onClick={this.deleteTask.bind(this)}>Delete</button>
+                    onClick={this.deleteTask.bind(this)}>Delete
+            </button>
         </li>;
     }
 
@@ -47,7 +52,6 @@ class Task extends Component {
     }
 
     toggleTaskStatus() {
-        // debugger
         let task = {
             ...this.props.task
         };
@@ -70,7 +74,6 @@ class Task extends Component {
     }
 
     saveTitle(event) {
-        // debugger
         let newTitle = event.currentTarget.value;
 
         let task = {

@@ -1,13 +1,14 @@
 import React, {Component} from 'react';
+import s from './ToDoListFooter.module.css';
+
 
 class ToDoListFooter extends Component {
 
     render() {
         return (
-            <div className="todolist__footer">
+            <div className={s.footerWrapper}>
                 <div>
-                    <span className="todolist__count">
-                        {this.props.tasks.filter(item => {
+                    <span> {this.props.tasks.filter(item => {
                             return !item.isDone
                         }).length} items left </span>
                 </div>

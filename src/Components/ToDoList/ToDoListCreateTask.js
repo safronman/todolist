@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
 import {createTask} from "./Services";
+import s from "./ToDoListCreateTask.module.css";
 
 class ToDoListCreateTask extends Component {
 
     render() {
         return (
-            <input className='todolist__input'
+            <input className={s.mainInput}
                    type='text'
                    placeholder='Введите таску'
                    onKeyPress={this.createTask.bind(this)}/>
