@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {updateTask} from "./Services";
+import {updateTask} from "../../Services";
 import s from "./Task.module.css";
 
 class Task extends Component {

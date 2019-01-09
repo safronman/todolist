@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import './ToDoList.css';
-import ToDoListCreateTask from "./ToDoListCreateTask";
-import TaskList from "./TasksList";
-import ToDoListFooter from "./ToDoListFooter";
+import ToDoListCreateTask from "./ToDoListCreateTask/ToDoListCreateTask";
+import TaskList from "./TasksList/TasksList";
+import ToDoListFooter from "./ToDoListFooter/ToDoListFooter";
 import {getTask} from "./Services";
 
 class ToDoList extends Component {
