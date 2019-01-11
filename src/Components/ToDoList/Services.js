@@ -45,3 +45,5 @@ export function updateTask(title, widgetId, taskId, isDone) {
 export function getTask(widgetId) {
     return requestData(`${apiUrl}?widgetId=${widgetId}&count=30`, 'GET', null)
 }
+
+//DELETE
