@@ -1,0 +1,7 @@
+.todolist {
+  width: 550px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 5px solid grey;
+  background-color: lightgrey;
+}

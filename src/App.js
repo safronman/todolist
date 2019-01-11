@@ -1,28 +1,18 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
+import React, {Component} from 'react';
 import './App.css';
+import ToDoList from "./Components/ToDoList/ToDoList";
 
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
+    render() {
+        return (
+            <div className="app">
+                <p className="app__warning">Внимание. На сервере установлено ожидание около 3 секунд.</p>
+                <p className="app__desc">Поэтому при добавление, удалении, изменении названия тасок и совершении других операций, связанных с
+                    сервером, необходимо выждать это время</p>
+                <ToDoList/>
+            </div>
+        );
+    }
 }
 
 export default App;

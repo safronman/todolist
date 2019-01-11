@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import s from './ToDoListFooter.module.css';
 
-
 class ToDoListFooter extends Component {
 
     render() {
@@ -13,18 +12,18 @@ class ToDoListFooter extends Component {
                         }).length} items left </span>
                 </div>
                 <div>
-                    <button className={this.props.filter === 'all' ? 'btn  btn--footer  btn--active' : 'btn  btn--footer'}
+                    <button className={this.props.filter === 'all' ? `${s.btn} ${s.btnFooter} ${s.btnActive}` : `${s.btn} ${s.btnFooter}`}
                             onClick={this.handleFilterChanged.bind(this)}
                             data-value='all'>All</button>
-                    <button className={this.props.filter === 'active' ? 'btn  btn--footer  btn--active' : 'btn  btn--footer'}
+                    <button className={this.props.filter === 'active' ? `${s.btn} ${s.btnFooter} ${s.btnActive}` : `${s.btn} ${s.btnFooter}`}
                             onClick={this.handleFilterChanged.bind(this)}
                             data-value='active'>Active</button>
-                    <button className={this.props.filter === 'completed' ? 'btn  btn--footer  btn--active' : 'btn  btn--footer'}
+                    <button className={this.props.filter === 'completed' ? `${s.btn} ${s.btnFooter} ${s.btnActive}` : `${s.btn} ${s.btnFooter}`}
                             onClick={this.handleFilterChanged.bind(this)}
                             data-value='completed'>Completed</button>
                 </div>
                 <div>
-                    <button className="btn  btn--footer"
+                    <button className={`${s.btn} ${s.btnFooter}`}
                             onClick={this.clearCompleted.bind(this)}>Clear completed</button>
                 </div>
             </div>

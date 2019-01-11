@@ -47,3 +47,6 @@ export function getTask(widgetId) {
 }
 
 //DELETE
+export function delTask(widgetId, taskId) {
+    return requestData(`${apiUrl}?widgetId=${widgetId}&taskId=${taskId}`, 'DELETE', null)
+}

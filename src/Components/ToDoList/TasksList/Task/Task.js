@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
-import {updateTask} from "../../Services";
+import {delTask, updateTask} from "../../Services";
 import s from "./Task.module.css";
+import deleteIcon from '../../../../img/delete.png';
 
 class Task extends Component {
     constructor(props) {
@@ -23,7 +24,7 @@ class Task extends Component {
                                     className={s.taskInput}
                                     value={this.state.title}
                                     onChange={this.changeTitle.bind(this)}
-                                    onBlur={this.saveTitle.bind(this)} />
+                                    onBlur={this.saveTitle.bind(this)}/>
         } else {
             displayElement =
                 <span onDoubleClick={this.goToEditMode.bind(this)}>
@@ -31,24 +32,34 @@ class Task extends Component {
                 </span>
         }
 
-        return <li className={this.props.task.isDone ? `${s.item} ${s.itemDone}` : `${s.item}`}>
-            <div>
-                <input
-                    className={s.taskCheckbox}
-                    type="checkbox"
-                    checked={this.props.task.isDone}
-                    onChange={this.toggleTaskStatus.bind(this)}/>
+        return (
+            <li className={this.props.task.isDone ? `${s.item} ${s.itemDone}` : `${s.item}`}>
+                <div>
+                    <input
+                        className={s.taskCheckbox}
+                        type="checkbox"
+                        checked={this.props.task.isDone}
+                        onChange={this.toggleTaskStatus.bind(this)}/>
 
-                {displayElement}
-            </div>
-            <button className='btn'
-                    onClick={this.deleteTask.bind(this)}>Delete
-            </button>
-        </li>;
+                    {displayElement}
+                </div>
+                <img className={s.deleteTask}
+                     src={deleteIcon}
+                     onClick={this.deleteTask.bind(this)}
+                     alt="Delete icon"/>
+            </li>
+        );
     }
 
     deleteTask() {
-        this.parentDeleteCallback(this.props.task.id);
+        let task = {
+            ...this.props.task
+        };
+
+        delTask(98919012, task.id)
+            .then(data => {
+                this.parentDeleteCallback(this.props.task.id);
+            })
     }
 
     toggleTaskStatus() {
@@ -59,7 +70,7 @@ class Task extends Component {
         task.isDone = !task.isDone;
 
         updateTask(task.title, 98919012, task.id, task.isDone)
-            .then ( data => {
+            .then(data => {
                 this.setState({
                     editMode: false
                 });
@@ -83,7 +94,7 @@ class Task extends Component {
         task.title = newTitle;
 
         updateTask(newTitle, 98919012, task.id, null)
-            .then ( data => {
+            .then(data => {
                 this.setState({
                     editMode: false
                 });

@@ -8,7 +8,7 @@ class ToDoListCreateTask extends Component {
         return (
             <input className={s.mainInput}
                    type='text'
-                   placeholder='Введите таску'
+                   placeholder='Input task'
                    onKeyPress={this.createTask.bind(this)}/>
         )
     }

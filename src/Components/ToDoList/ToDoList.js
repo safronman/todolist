@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import './ToDoList.css';
+import s from "./ToDoList.module.css";
 import ToDoListCreateTask from "./ToDoListCreateTask/ToDoListCreateTask";
 import TaskList from "./TasksList/TasksList";
 import ToDoListFooter from "./ToDoListFooter/ToDoListFooter";
@@ -59,7 +59,7 @@ class ToDoList extends Component {
         }
 
         return (
-            <div className='todolist'>
+            <div className={s.todolist}>
                 <ToDoListCreateTask task={this.state.tasks}
                                     createTaskCallback={this.addTaskToState.bind(this)}/>
                 <TaskList tasks={filterdTasks}
@@ -93,7 +93,6 @@ class ToDoList extends Component {
         newTasksList.forEach((item) => {
             if (item.id === task.id) {
                 item.isDone = task.isDone;
-                // return;
             }
         });
 
