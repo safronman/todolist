@@ -87,10 +87,6 @@ class ToDoList extends Component {
         })
     }
 
-    newMethod() {
-        console.log(1);
-    }
-
     updateTask(task) {
         let newTasksList = [...this.state.tasks];
 
