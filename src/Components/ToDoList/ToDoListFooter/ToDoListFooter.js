@@ -35,7 +35,6 @@ class ToDoListFooter extends Component {
     }
 
     clearCompleted () {
-debugger
         this.props.clearCompletedCallback();
     }
 }
