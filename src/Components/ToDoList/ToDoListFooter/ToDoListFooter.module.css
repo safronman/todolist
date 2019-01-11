@@ -4,31 +4,21 @@
     align-items: center;
 }
 
-/* BUTTONS */
 .btn {
     padding: 10px;
-    cursor: pointer;
-    color: white;
-    border: none;
-    background-color: indianred;
-}
-
-.btn:hover {
-    background-color: darkred;
-}
-
-.btnFooter {
     margin-right: 10px;
+    color: white;
     border: 2px solid black;
     background-color: lightslategray;
 }
 
-.btnFooter:last-child {
+.btn:last-child {
     margin-right: 0;
 }
 
-.btnFooter:hover {
+.btn:hover {
     background-color: #566474;
+    cursor: pointer;
 }
 
 .btnActive {
