@@ -1,19 +1,10 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {createTask} from "../Services";
 import s from "./ToDoListCreateTask.module.css";
 
-class ToDoListCreateTask extends Component {
+const ToDoListCreateTask = (props) => {
 
-    render() {
-        return (
-            <input className={s.mainInput}
-                   type='text'
-                   placeholder='Input task'
-                   onKeyPress={this.createTask.bind(this)}/>
-        )
-    }
-
-    createTask(event) {
+    let createNewTask = (event) => {
         if (event.key === 'Enter') {
 
             let newTaskInput = event.currentTarget;
@@ -27,12 +18,19 @@ class ToDoListCreateTask extends Component {
                         id: data.task.id
                     };
 
-                    this.props.createTaskCallback(newTask);
+                    props.createTaskCallback(newTask);
 
                     newTaskInput.value = '';
                 })
         }
-    }
-}
+    };
+
+    return (
+        <input className={s.mainInput}
+               type='text'
+               placeholder='Input task'
+               onKeyPress={createNewTask}/>
+    )
+};
 
 export default ToDoListCreateTask;
