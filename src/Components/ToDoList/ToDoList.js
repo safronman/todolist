@@ -1,23 +1,37 @@
 import React, {Component} from 'react';
+import {createStore} from 'redux';
 import s from "./ToDoList.module.css";
 import ToDoListCreateTask from "./ToDoListCreateTask/ToDoListCreateTask";
 import TaskList from "./TasksList/TasksList";
 import ToDoListFooter from "./ToDoListFooter/ToDoListFooter";
-import {getTask} from "./Services";
+import {getTasks} from "./Services";
+import {todolistReducer} from "./redux/todolist-reducers";
+import {
+    getTasksActionCreator,
+    createTaskActionCreator,
+    deleteTaskActionCreator,
+    updateTaskActionCreator,
+    changeFilterActionCreator,
+    clearCompletedActionCreator,
+} from "./redux/todolist-actions";
 
 class ToDoList extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
-        this.state = {
-            tasks: [],
-            filter: 'all'
-        };
+        this.store = createStore(todolistReducer);
+        let state = this.store.getState();
 
-        getTask(98919012)
+        this.state = state;
+
+        this.store.subscribe(() => {
+            let state = this.store.getState();
+            this.setState(state);
+        });
+
+        getTasks(98919012)
             .then(tasksFromServer => {
-
                 let tasks = tasksFromServer.map(itemFromServer => {
                     return {
                         title: itemFromServer.title,
@@ -26,28 +40,27 @@ class ToDoList extends Component {
                     }
                 });
 
-                this.setState({
-                    tasks: tasks
-                })
+                let action = getTasksActionCreator(tasks);
+                this.store.dispatch(action);
             })
     }
 
     render() {
-        let filterdTasks = [];
+        let filteredTasks = [];
 
         switch (this.state.filter) {
             case 'all':
-                filterdTasks = this.state.tasks;
+                filteredTasks = this.state.tasks;
                 break;
 
             case 'active':
-                filterdTasks = this.state.tasks.filter((item) => {
+                filteredTasks = this.state.tasks.filter((item) => {
                     return item.isDone === false
                 });
                 break;
 
             case 'completed':
-                filterdTasks = this.state.tasks.filter((item) => {
+                filteredTasks = this.state.tasks.filter((item) => {
                     return item.isDone === true
                 });
                 break;
@@ -55,14 +68,13 @@ class ToDoList extends Component {
             default:
                 console.log('Unknown operation');
                 break;
-
         }
 
         return (
             <div className={s.todolist}>
                 <ToDoListCreateTask task={this.state.tasks}
-                                    createTaskCallback={this.addTaskToState.bind(this)}/>
-                <TaskList tasks={filterdTasks}
+                                    createTaskCallback={this.createTaskToState.bind(this)}/>
+                <TaskList tasks={filteredTasks}
                           deleteTaskCallback={this.deleteTask.bind(this)}
                           updateTaskCallback={this.updateTask.bind(this)}/>
                 <ToDoListFooter tasks={this.state.tasks}
@@ -73,46 +85,29 @@ class ToDoList extends Component {
         );
     }
 
-    addTaskToState(task) {
-        this.setState({
-            tasks: [...this.state.tasks, task]
-        })
+    createTaskToState(task) {
+        let action = createTaskActionCreator(task);
+        this.store.dispatch(action);
     }
 
     deleteTask(taskId) {
-        this.setState({
-            tasks: this.state.tasks.filter((item) => {
-                return item.id !== taskId;
-            })
-        })
+        let action = deleteTaskActionCreator(taskId);
+        this.store.dispatch(action);
     }
 
     updateTask(task) {
-        let newTasksList = [...this.state.tasks];
-
-        newTasksList.forEach((item) => {
-            if (item.id === task.id) {
-                item.isDone = task.isDone;
-            }
-        });
-
-        this.setState({
-            tasks: newTasksList
-        })
+        let action = updateTaskActionCreator(task);
+        this.store.dispatch(action);
     }
 
     changeFilter(filterValue) {
-        this.setState({
-            filter: filterValue
-        })
+        let action = changeFilterActionCreator(filterValue);
+        this.store.dispatch(action);
     }
 
     clearCompleted() {
-        this.setState({
-            tasks: this.state.tasks.filter((item) => {
-                return item.isDone === false
-            })
-        })
+        let action = clearCompletedActionCreator();
+        this.store.dispatch(action);
     }
 }
 
