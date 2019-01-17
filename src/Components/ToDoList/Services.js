@@ -42,7 +42,7 @@ export function updateTask(title, widgetId, taskId, isDone) {
 }
 
 // GET
-export function getTask(widgetId) {
+export function getTasks(widgetId) {
     return requestData(`${apiUrl}?widgetId=${widgetId}&count=30`, 'GET', null)
 }
 
